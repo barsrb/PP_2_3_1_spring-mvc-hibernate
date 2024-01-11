@@ -16,4 +16,16 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
+    public void createUser(User user) {
+        userRepository.addOrUpdateUser(user);
+    }
+
+    public void deleteUser(long id) {
+        userRepository.deleteUser(new User(id, null, null));
+    }
+
+    public User getUserByID(long id) {
+        return userRepository.getById(id);
+    }
 }
