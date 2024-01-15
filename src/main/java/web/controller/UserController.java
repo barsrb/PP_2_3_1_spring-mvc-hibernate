@@ -40,7 +40,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/edit")
-	public String usersList(@RequestParam(value = "id", required=false, defaultValue = "0") long id, ModelMap model) {
+	public String editUserForm(@RequestParam(value = "id") long id, ModelMap model) {
 		model.addAttribute("user", userService.getUserByID(id));
 		return "user_form";
 	}
