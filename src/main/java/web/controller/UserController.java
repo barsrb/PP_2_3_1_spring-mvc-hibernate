@@ -13,8 +13,12 @@ import web.service.UserService;
 @Controller
 public class UserController {
 
+	private final UserService userService;
+
 	@Autowired
-	UserService userService;
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@GetMapping(value = "/")
 	public String usersList(ModelMap model) {
@@ -23,14 +27,14 @@ public class UserController {
 		return "users_list";
 	}
 
-	@PostMapping(value = "/")
+	@PostMapping(value = "/create")
 	public String createUser(@ModelAttribute User user, ModelMap model) {
 		userService.createUser(user);
 		return "redirect:/";
 	}
 
 	@GetMapping(value = "/delete")
-	public String deleteUser(@RequestParam(value = "id", required=false, defaultValue = "0") long id, ModelMap model) {
+	public String deleteUser(@RequestParam(value = "id") long id, ModelMap model) {
 		userService.deleteUser(id);
 		return "redirect:/";
 	}
@@ -40,5 +44,11 @@ public class UserController {
 		model.addAttribute("user", userService.getUserByID(id));
 		return "user_form";
 	}
-	
+
+	@PostMapping(value = "/edit")
+	public String editUser(@ModelAttribute User user, ModelMap model) {
+		userService.editUser(user);
+		return "redirect:/";
+	}
+
 }
