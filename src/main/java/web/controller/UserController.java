@@ -27,7 +27,7 @@ public class UserController {
 		return "users_list";
 	}
 
-	@PostMapping(value = "/")
+	@PostMapping(value = "/create")
 	public String createUser(@ModelAttribute User user, ModelMap model) {
 		userService.createUser(user);
 		return "redirect:/";
@@ -43,6 +43,12 @@ public class UserController {
 	public String usersList(@RequestParam(value = "id", required=false, defaultValue = "0") long id, ModelMap model) {
 		model.addAttribute("user", userService.getUserByID(id));
 		return "user_form";
+	}
+
+	@PostMapping(value = "/edit")
+	public String editUser(@ModelAttribute User user, ModelMap model) {
+		userService.editUser(user);
+		return "redirect:/";
 	}
 	
 }
