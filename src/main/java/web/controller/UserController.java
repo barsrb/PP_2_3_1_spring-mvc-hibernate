@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/delete")
-	public String deleteUser(@RequestParam(value = "id", required=false, defaultValue = "0") long id, ModelMap model) {
+	public String deleteUser(@RequestParam(value = "id") long id, ModelMap model) {
 		userService.deleteUser(id);
 		return "redirect:/";
 	}
